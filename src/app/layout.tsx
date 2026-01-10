@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Rick & Morty app | Conexa ",
   description: "Challenge for Conexa Tech by Francisco Agustín Rodríguez",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
