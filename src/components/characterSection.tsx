@@ -2,6 +2,7 @@ import React from 'react';
 import { Character } from '@/types';
 import CharacterCard from '@/components/characterCard';
 import { useCharacters } from '@/hooks/useCharacters';
+import Pagination from './pagination';
 
 interface CharacterSectionProps {
     title: string;
@@ -14,7 +15,8 @@ export default function CharacterSection({
     selectedCharacter,
     onSelectCharacter,
 }: CharacterSectionProps) {
-    const { data, isLoading, isError } = useCharacters(1);
+    const [page, setPage] = React.useState(1);
+    const { data, isLoading, isError } = useCharacters(page);
     const deleteSelected = () => {
         if (selectedCharacter) {
             onSelectCharacter(null);
@@ -76,6 +78,13 @@ export default function CharacterSection({
                     />
                 ))}
             </div>
+            {data && (
+                <Pagination
+                    currentPage={page}
+                    totalPages={data.info.pages}
+                    onPageChange={setPage}
+                />
+            )}
         </div>
     );
 }
