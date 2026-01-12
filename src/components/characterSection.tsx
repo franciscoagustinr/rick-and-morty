@@ -50,8 +50,8 @@ export default function CharacterSection({
 
     return (
         <div className="flex flex-col px-3 py-3 border border-gray-400 my-2 rounded-lg">
-            <div className='flex gap-3 items-center mb-5'>
-                <h2 className="text-xl lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
+            <div className='flex gap-2 lg:gap-3 items-center mb-5'>
+                <h2 className="text-lg lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
                 <SelectedCharacterIndicator selectedCharacter={selectedCharacter} deleteSelected={deleteSelected} />
             </div>
 

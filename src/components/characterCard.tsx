@@ -31,7 +31,7 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
                 />
             </div>
             <div className="bg-gray-50 h-full p-2 border-t border-gray-700">
-                <h3 title={character.name} className="font-bold text-base text-gray-800 truncate">
+                <h3 title={character.name} className="font-bold text-sm lg:text-base text-gray-800 truncate">
                     {character.name}
                 </h3>
                 <div className="flex items-center gap-1">

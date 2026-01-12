@@ -13,7 +13,7 @@ export const Header = () => {
         className="mx-auto w-50 max-h-16"
       />
       <p className="font-mono text-xs text-center">Characters Comparison </p>
-      <p className="text-gray-500 font-mono text-center text-base pt-1">
+      <p className="text-gray-500 font-mono text-center text-sm lg:text-base pt-1">
         💥 Select characters to check in what episodes they appeared 💥
       </p>
     </div>
