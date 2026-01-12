@@ -24,7 +24,9 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
                 <Image
                     src={character.image}
                     alt={character.name}
+                    loading="eager"
                     fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-contain lg:object-cover"
                 />
             </div>
