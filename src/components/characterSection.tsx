@@ -86,7 +86,7 @@ export default function CharacterSection({
                 </button>
             </div>
 
-            <div className={`${isExpanded ? 'block' : 'hidden'} lg:block`}>
+            <div className={`${isExpanded ? 'flex flex-col justify-between h-full' : 'hidden'} lg:flex flex-col justify-between h-full`}>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
                     {data?.results.map((character) => (
                         <CharacterCard
@@ -99,7 +99,7 @@ export default function CharacterSection({
                     ))}
                 </div>
                 {data && (
-                    <div className='mt-auto'>
+                    <div className=''>
                         <Pagination
                             currentPage={page}
                             totalPages={data.info.pages}
