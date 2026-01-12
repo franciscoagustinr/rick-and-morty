@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { useState } from "react";
+import CopyButton from "./copyButton";
+import ToggleArrowButton from "./toggleArrowButton";
 
 interface EpisodesListProps {
     title: string | undefined;
@@ -8,13 +11,23 @@ interface EpisodesListProps {
     image?: string;
     onToggle?: () => void;
     isExpanded?: boolean;
+    onCopy?: () => void;
 }
 
-const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, onToggle, isExpanded }: EpisodesListProps) => {
+const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, onToggle, isExpanded, onCopy }: EpisodesListProps) => {
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopy = () => {
+        if (onCopy) {
+            onCopy();
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 3000);
+        }
+    };
 
     return (
         <>
-            <div className="text-xl mb-4 flex justify-between items-center">
+            <div className="relative text-xl mb-4 flex justify-between items-start">
                 <div className="flex flex-row gap-2 items-center">
                     {image && (
                         <div>
@@ -26,7 +39,7 @@ const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, 
                                 className="rounded-full object-contain" />
                         </div>
                     )}
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start ">
                         {characterId && (
                             <span className="text-xs text-gray-400 font-semibold font-mono">#{characterId}</span>
                         )}
@@ -43,28 +56,15 @@ const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, 
                         <span className="text-base font-semibold">{episodeIds.length}</span><span className="text-xs font-light text-gray-300">/51</span>
                     </div>
                     {onToggle && (
-                        <button
-                            onClick={onToggle}
-                            className={`lg:hidden p-1 text-gray-400 focus:outline-none transition-transform duration-200 ${!isExpanded ? 'rotate-180' : ''}`}
-                            aria-label={isExpanded ? "Collapse section" : "Expand section"}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
+                        <ToggleArrowButton isExpanded={isExpanded} onToggle={onToggle} />
                     )}
                 </div>
+                {onCopy && (
+                    <CopyButton isCopied={isCopied} handleCopy={handleCopy} />
+                )}
+
             </div>
+
         </>
     )
 

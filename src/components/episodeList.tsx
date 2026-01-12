@@ -22,6 +22,12 @@ export default function EpisodesList({ title, episodeIds, variant, characterId, 
         shared: "border-green-400 bg-green-50/10",
     };
 
+    const handleCopy = () => {
+        if (!episodes) return;
+        const text = episodes.map(e => `${e.episode}: ${e.name} - ${e.air_date}`).join('\n');
+        navigator.clipboard.writeText(text);
+    };
+
     if (isLoading && !episodes) {
         return (
             <div className="p-4 border-t-4 rounded-lg animate-pulse">
@@ -40,6 +46,7 @@ export default function EpisodesList({ title, episodeIds, variant, characterId, 
                 image={image}
                 isExpanded={isExpanded}
                 onToggle={() => setIsExpanded(!isExpanded)}
+                onCopy={handleCopy}
             />
 
             <div className={`${isExpanded ? 'block' : 'hidden'} lg:block`}>
