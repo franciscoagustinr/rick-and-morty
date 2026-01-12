@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Character } from '@/types';
 import CharacterCard from '@/components/characterCard';
 import { useCharacters } from '@/hooks/useCharacters';
@@ -20,6 +20,13 @@ export default function CharacterSection({
 }: CharacterSectionProps) {
     const [page, setPage] = useState<number>(1);
     const [isExpanded, setIsExpanded] = useState<boolean>(true);
+    const titleRef = useRef<HTMLDivElement>(null);
+
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+        titleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
     const { data, isLoading, isError } = useCharacters(page);
     const deleteSelected = () => {
         if (selectedCharacter) {
@@ -53,7 +60,7 @@ export default function CharacterSection({
 
     return (
         <div className="flex flex-col px-3 py-3 border border-gray-400 my-2 rounded-lg">
-            <div className={`flex gap-2 lg:gap-3 items-center ${!isExpanded ? 'mb-0' : 'mb-3'} lg:mb-5`}>
+            <div ref={titleRef} className={`flex gap-2 lg:gap-3 items-center ${!isExpanded ? 'mb-0' : 'mb-3'} lg:mb-5`}>
                 <div className='flex flex-col md:flex-row gap-2'>
                     <h2 className="text-lg lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
                     <SelectedCharacterIndicator selectedCharacter={selectedCharacter} deleteSelected={deleteSelected} />
@@ -96,7 +103,7 @@ export default function CharacterSection({
                         <Pagination
                             currentPage={page}
                             totalPages={data.info.pages}
-                            onPageChange={setPage}
+                            onPageChange={handlePageChange}
                         />
                     </div>
                 )}

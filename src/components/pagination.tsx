@@ -21,9 +21,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         pages.push(i);
     }
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [currentPage])
+
 
     return (
         <div className="flex justify-center items-center gap-1 sm:gap-2 mt-6 text-[10px] sm:text-xs flex-wrap">
