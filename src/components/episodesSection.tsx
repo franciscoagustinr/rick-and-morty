@@ -11,8 +11,11 @@ interface EpisodesSectionProps {
 }
 
 export const EpisodesSection = ({ character1, character2, ids1, ids2, shared, showEpisodes }: EpisodesSectionProps) => {
+    const isDesktop = window.innerWidth >= 1024;
+
+
     return !showEpisodes ? (
-        <div className="py-3 text-center border-2 border-red-500 mb-4 rounded-lg font-sans text-sm">
+        <div className="px-2 py-3 text-center border-2 border-red-500 mb-4 rounded-lg font-sans text-sm">
             Please, select one character of each side to get the list of episodes they appeared in.
         </div>
     ) : (
@@ -24,20 +27,43 @@ export const EpisodesSection = ({ character1, character2, ids1, ids2, shared, sh
                 variant="character1"
                 image={character1?.image}
             />
-            <EpisodesList
-                title="Shared Episodes"
-                episodeIds={shared}
-                variant="shared"
-                characters={`${character1?.name} & ${character2?.name}`}
-            />
-            <EpisodesList
-                title={character2?.name}
-                characterId={character2?.id}
-                episodeIds={ids2}
-                variant="character2"
-                image={character2?.image}
+            {
+                !isDesktop ? (
+                    <>
+                        <EpisodesList
+                            title={character2?.name}
+                            characterId={character2?.id}
+                            episodeIds={ids2}
+                            variant="character2"
+                            image={character2?.image}
 
-            />
+                        />
+                        <EpisodesList
+                            title="Shared Episodes"
+                            episodeIds={shared}
+                            variant="shared"
+                            characters={`${character1?.name} & ${character2?.name}`}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <EpisodesList
+                            title="Shared Episodes"
+                            episodeIds={shared}
+                            variant="shared"
+                            characters={`${character1?.name} & ${character2?.name}`}
+                        />
+                        <EpisodesList
+                            title={character2?.name}
+                            characterId={character2?.id}
+                            episodeIds={ids2}
+                            variant="character2"
+                            image={character2?.image}
+
+                        />
+                    </>
+                )
+            }
         </div>
     );
 }

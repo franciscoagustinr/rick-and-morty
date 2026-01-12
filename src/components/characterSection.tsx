@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Character } from '@/types';
 import CharacterCard from '@/components/characterCard';
 import { useCharacters } from '@/hooks/useCharacters';
@@ -16,7 +16,8 @@ export default function CharacterSection({
     selectedCharacter,
     onSelectCharacter,
 }: CharacterSectionProps) {
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState<number>(1);
+    const [isExpanded, setIsExpanded] = useState<boolean>(true);
     const { data, isLoading, isError } = useCharacters(page);
     const deleteSelected = () => {
         if (selectedCharacter) {
@@ -50,30 +51,53 @@ export default function CharacterSection({
 
     return (
         <div className="flex flex-col px-3 py-3 border border-gray-400 my-2 rounded-lg">
-            <div className='flex gap-2 lg:gap-3 items-center mb-5'>
-                <h2 className="text-lg lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
-                <SelectedCharacterIndicator selectedCharacter={selectedCharacter} deleteSelected={deleteSelected} />
+            <div className={`flex gap-2 lg:gap-3 items-center ${!isExpanded ? 'mb-0' : 'mb-3'} lg:mb-5`}>
+                <div className='flex flex-col md:flex-row gap-2'>
+                    <h2 className="text-lg lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
+                    <SelectedCharacterIndicator selectedCharacter={selectedCharacter} deleteSelected={deleteSelected} />
+                </div>
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className={`ml-auto lg:hidden p-1 text-gray-400 focus:outline-none transition-transform duration-200 ${!isExpanded ? 'rotate-180' : ''}`}
+                    aria-label={isExpanded ? "Collapse section" : "Expand section"}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
-                {data?.results.map((character) => (
-                    <CharacterCard
-                        key={character.id}
-                        character={character}
-                        isSelected={selectedCharacter?.id === character.id}
-                        onClick={() => onSelectCharacter(character)}
-                    />
-                ))}
-            </div>
-            {data && (
-                <div className='mt-auto'>
-                    <Pagination
-                        currentPage={page}
-                        totalPages={data.info.pages}
-                        onPageChange={setPage}
-                    />
+            <div className={`${isExpanded ? 'block' : 'hidden'} lg:block`}>
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
+                    {data?.results.map((character) => (
+                        <CharacterCard
+                            key={character.id}
+                            character={character}
+                            isSelected={selectedCharacter?.id === character.id}
+                            onClick={() => onSelectCharacter(character)}
+                        />
+                    ))}
                 </div>
-            )}
+                {data && (
+                    <div className='mt-auto'>
+                        <Pagination
+                            currentPage={page}
+                            totalPages={data.info.pages}
+                            onPageChange={setPage}
+                        />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

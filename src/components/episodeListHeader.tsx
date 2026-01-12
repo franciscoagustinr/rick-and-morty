@@ -6,9 +6,11 @@ interface EpisodesListProps {
     characterId?: number;
     characters?: string;
     image?: string;
+    onToggle?: () => void;
+    isExpanded?: boolean;
 }
 
-const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters }: EpisodesListProps) => {
+const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, onToggle, isExpanded }: EpisodesListProps) => {
 
     return (
         <>
@@ -36,8 +38,31 @@ const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters }
                         </div>
                     </div>
                 </div>
-                <div title={`${title === 'Shared Episodes' ? `Appears together in ${episodeIds.length}/51 total episodes` : `Appears in ${episodeIds.length}/51 total episodes`}`} className="font-mono tracking-wide select-none">
-                    <span className="text-base font-semibold">{episodeIds.length}</span><span className="text-xs font-light text-gray-300">/51</span>
+                <div className="flex items-center gap-2">
+                    <div title={`${title === 'Shared Episodes' ? `Appears together in ${episodeIds.length}/51 total episodes` : `Appears in ${episodeIds.length}/51 total episodes`}`} className="font-mono tracking-wide select-none">
+                        <span className="text-base font-semibold">{episodeIds.length}</span><span className="text-xs font-light text-gray-300">/51</span>
+                    </div>
+                    {onToggle && (
+                        <button
+                            onClick={onToggle}
+                            className={`lg:hidden p-1 text-gray-400 focus:outline-none transition-transform duration-200 ${!isExpanded ? 'rotate-180' : ''}`}
+                            aria-label={isExpanded ? "Collapse section" : "Expand section"}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    )}
                 </div>
             </div>
         </>

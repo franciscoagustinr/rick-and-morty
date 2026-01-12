@@ -17,7 +17,7 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
     return (
         <div
             onClick={onClick}
-            className={`w-full max-w-36 sm:max-w-none h-full cursor-pointer rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105 shadow-lg' : 'shadow-sm'
+            className={`w-full max-w-36 sm:max-w-none md:max-w-44 h-full cursor-pointer rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105 shadow-lg' : 'shadow-sm'
                 }`}
         >
             <div className="relative aspect-square w-full">

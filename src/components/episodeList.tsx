@@ -11,8 +11,11 @@ interface EpisodesListProps {
     image?: string;
 }
 
+import { useState } from 'react';
+
 export default function EpisodesList({ title, episodeIds, variant, characterId, characters, image }: EpisodesListProps) {
     const { data: episodes, isLoading, isError } = useEpisodes(episodeIds);
+    const [isExpanded, setIsExpanded] = useState(true);
     const colors = {
         character1: "border-blue-400 bg-blue-50/10",
         character2: "border-purple-400 bg-purple-50/10",
@@ -29,17 +32,28 @@ export default function EpisodesList({ title, episodeIds, variant, characterId, 
 
     return (
         <div className={`p-4 border-t-4 rounded-lg shadow-sm ${colors[variant]}`}>
-            <EpisodeListHeader title={title} episodeIds={episodeIds} characterId={characterId} characters={characters} image={image} />
+            <EpisodeListHeader
+                title={title}
+                episodeIds={episodeIds}
+                characterId={characterId}
+                characters={characters}
+                image={image}
+                isExpanded={isExpanded}
+                onToggle={() => setIsExpanded(!isExpanded)}
+            />
 
-            {!isLoading && episodeIds.length === 0 && (
-                <p className="text-gray-500 italic text-sm text-center py-10">No episodes found.</p>
-            )}
-            {isError && <p className="text-red-500 text-sm">{isError}</p>}
+            <div className={`${isExpanded ? 'block' : 'hidden'} lg:block`}>
 
-            <div className="space-y-2 max-h-125 overflow-y-auto pr-2">
-                {episodes?.map((episode) => (
-                    <EpisodeDetails key={episode.id} episode={episode} />
-                ))}
+                {!isLoading && episodeIds.length === 0 && (
+                    <p className="text-gray-500 italic text-sm text-center py-10">No episodes found.</p>
+                )}
+                {isError && <p className="text-red-500 text-sm">{isError}</p>}
+
+                <div className="space-y-2 max-h-125 overflow-y-auto pr-2">
+                    {episodes?.map((episode) => (
+                        <EpisodeDetails key={episode.id} episode={episode} />
+                    ))}
+                </div>
             </div>
         </div>
     );
