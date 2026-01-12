@@ -17,7 +17,7 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
     return (
         <div
             onClick={onClick}
-            className={`min-h-51.25 cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105' : ''
+            className={`h-46 cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105' : ''
                 }`}
         >
             <div className="relative h-32 w-auto">
@@ -32,13 +32,13 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
                 <h3 title={character.name} className="font-bold text-base text-gray-800 truncate">
                     {character.name}
                 </h3>
-                <div className="flex items-center gap-1 mb-1">
+                <div className="flex items-center gap-1">
                     <span className={`w-2 h-2 rounded-full ${statusColor}`}></span>
-                    <span className="text-xs text-gray-600">
+                    <span className="text-xs text-gray-600 truncate" title={`${character.status} - ${character.species}`}  >
                         {character.status} - {character.species}
                     </span>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

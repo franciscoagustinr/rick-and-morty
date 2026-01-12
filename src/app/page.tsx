@@ -1,10 +1,10 @@
 'use client';
 import Header from "@/components/header";
 import CharacterSection from "@/components/characterSection";
-import EpisodesList from "@/components/episodeList";
 import { useState, useMemo } from "react";
 import { Character } from "@/types";
 import { getComparisonEpisodes, getIds } from "@/utils/episodeHelpers";
+import { EpisodesSection } from "@/components/episodesSection";
 
 export default function Home() {
   const [character1, setCharacter1] = useState<Character | null>(null);
@@ -16,15 +16,13 @@ export default function Home() {
   );
   const ids1 = useMemo(() => getIds(character1), [character1]);
   const ids2 = useMemo(() => getIds(character2), [character2]);
-  const showEpisodes = character1 || character2;
-
-  console.log(character1)
+  const showEpisodes = character1 && character2;
 
   return (
-    <main className="min-h-screen w-full bg-white dark:bg-black dark:text-white px-4">
+    <main className="min-h-screen w-full bg-white dark:bg-black dark:text-white px-4 font-sans">
       <Header />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <CharacterSection
           title="Character #1"
           selectedCharacter={character1}
@@ -37,31 +35,7 @@ export default function Home() {
         />
       </div>
 
-      {!showEpisodes ? (
-        <p>
-          no characters selected
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-20">
-          <EpisodesList
-            title={character1?.name}
-            characterId={character1?.id}
-            episodeIds={ids1}
-            variant="character1"
-          />
-          <EpisodesList
-            title="Shared Episodes"
-            episodeIds={shared}
-            variant="shared"
-          />
-          <EpisodesList
-            title={character2?.name}
-            characterId={character2?.id}
-            episodeIds={ids2}
-            variant="character2"
-          />
-        </div>
-      )}
+      <EpisodesSection character1={character1} character2={character2} ids1={ids1} ids2={ids2} shared={shared} showEpisodes={showEpisodes} />
     </main>
   );
 }

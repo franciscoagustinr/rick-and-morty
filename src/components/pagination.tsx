@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface PaginationProps {
     currentPage: number;
     totalPages: number;
@@ -19,12 +21,16 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         pages.push(i);
     }
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage])
+
     return (
         <div className="flex justify-center items-center gap-2 mt-6 text-xs">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-[#00B1C8] text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-[#057887] transition-colors duration-200"
             >
                 <span className="rotate-180 block">➜</span>
             </button>
@@ -33,7 +39,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 <>
                     <button
                         onClick={() => onPageChange(1)}
-                        className="px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                        className="cursor-pointer px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                         1
                     </button>
@@ -45,8 +51,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 <button
                     key={page}
                     onClick={() => onPageChange(page)}
-                    className={`px-3 py-2 rounded-lg transition-colors ${page === currentPage
-                        ? 'bg-blue-500 text-white font-semibold ring-2 ring-white'
+                    className={`cursor-pointer px-3 py-2 rounded-lg transition-colors duration-200 ${page === currentPage
+                        ? 'bg-[#00B1C8] text-white font-semibold ring-1 ring-white'
                         : 'bg-white text-gray-700 hover:bg-gray-100'
                         }`}
                 >
@@ -59,7 +65,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                     {endPage < totalPages - 1 && <span className="text-gray-500">...</span>}
                     <button
                         onClick={() => onPageChange(totalPages)}
-                        className="px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                        className="cursor-pointer px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                         {totalPages}
                     </button>
@@ -69,7 +75,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-[#00B1C8] text-white disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-[#057887] transition-colors"
             >
                 ➜
             </button>
