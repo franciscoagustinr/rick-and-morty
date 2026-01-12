@@ -4,10 +4,11 @@ import Image from 'next/image';
 interface CharacterCardProps {
     character: Character;
     isSelected?: boolean;
+    disabled?: boolean;
     onClick?: () => void;
 }
 
-export default function CharacterCard({ character, isSelected, onClick }: CharacterCardProps) {
+export default function CharacterCard({ character, isSelected, disabled, onClick }: CharacterCardProps) {
     const statusColor = {
         Alive: 'bg-green-500',
         Dead: 'bg-red-500',
@@ -16,8 +17,10 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
 
     return (
         <div
-            onClick={onClick}
-            className={`w-full max-w-36 sm:max-w-none md:max-w-44 h-full cursor-pointer rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105 shadow-lg' : 'shadow-sm'
+            onClick={!disabled ? onClick : undefined}
+            className={`w-full max-w-36 sm:max-w-none md:max-w-44 h-full rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 ${disabled
+                ? 'opacity-50 grayscale cursor-not-allowed bg-gray-100'
+                : `cursor-pointer hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105 shadow-lg' : 'shadow-sm'}`
                 }`}
         >
             <div className="relative aspect-square w-full">

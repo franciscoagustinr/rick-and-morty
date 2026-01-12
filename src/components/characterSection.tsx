@@ -8,12 +8,14 @@ import SelectedCharacterIndicator from './selectedCharacterIndicator';
 interface CharacterSectionProps {
     title: string;
     selectedCharacter: Character | null;
+    otherSelectedCharacter?: Character | null;
     onSelectCharacter: (character: Character | null) => void;
 }
 
 export default function CharacterSection({
     title,
     selectedCharacter,
+    otherSelectedCharacter,
     onSelectCharacter,
 }: CharacterSectionProps) {
     const [page, setPage] = useState<number>(1);
@@ -84,6 +86,7 @@ export default function CharacterSection({
                             key={character.id}
                             character={character}
                             isSelected={selectedCharacter?.id === character.id}
+                            disabled={otherSelectedCharacter?.id === character.id}
                             onClick={() => onSelectCharacter(character)}
                         />
                     ))}

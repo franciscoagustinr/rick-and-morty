@@ -26,11 +26,13 @@ export default function Home() {
         <CharacterSection
           title="Character #1"
           selectedCharacter={character1}
+          otherSelectedCharacter={character2}
           onSelectCharacter={setCharacter1}
         />
         <CharacterSection
           title="Character #2"
           selectedCharacter={character2}
+          otherSelectedCharacter={character1}
           onSelectCharacter={setCharacter2}
         />
       </div>
