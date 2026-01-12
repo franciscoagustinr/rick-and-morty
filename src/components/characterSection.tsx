@@ -51,11 +51,11 @@ export default function CharacterSection({
     return (
         <div className="flex flex-col px-3 py-3 border border-gray-400 my-2 rounded-lg">
             <div className='flex gap-3 items-center mb-5'>
-                <h2 className="text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
+                <h2 className="text-xl lg:text-2xl font-bold text-gray-400 underline underline-offset-4 decoration-wavy decoration-yellow-400 ">{title}</h2>
                 <SelectedCharacterIndicator selectedCharacter={selectedCharacter} deleteSelected={deleteSelected} />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
                 {data?.results.map((character) => (
                     <CharacterCard
                         key={character.id}

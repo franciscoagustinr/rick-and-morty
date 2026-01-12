@@ -17,15 +17,15 @@ export default function CharacterCard({ character, isSelected, onClick }: Charac
     return (
         <div
             onClick={onClick}
-            className={`h-46 cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105' : ''
+            className={`w-full max-w-36 sm:max-w-none h-full cursor-pointer rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:scale-105 ${isSelected ? 'ring-4 ring-blue-500 scale-105 shadow-lg' : 'shadow-sm'
                 }`}
         >
-            <div className="relative h-32 w-auto">
+            <div className="relative aspect-square w-full">
                 <Image
                     src={character.image}
                     alt={character.name}
                     fill
-                    className="object-cover"
+                    className="object-contain lg:object-cover"
                 />
             </div>
             <div className="bg-gray-50 h-full p-2 border-t border-gray-700">
