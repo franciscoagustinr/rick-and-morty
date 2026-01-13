@@ -1,10 +1,10 @@
 'use client';
 import Header from "@/components/header";
-import CharacterSection from "@/components/characterSection";
+import CharacterSection from "@/components/characters/characterSection";
 import { useState, useMemo } from "react";
 import { Character } from "@/types";
 import { getComparisonEpisodes, getIds } from "@/utils/episodeHelpers";
-import { EpisodesSection } from "@/components/episodesSection";
+import { EpisodesSection } from "@/components/episodes/episodesSection";
 
 export default function Home() {
   const [character1, setCharacter1] = useState<Character | null>(null);

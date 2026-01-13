@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 interface PaginationProps {
     currentPage: number;
     totalPages: number;

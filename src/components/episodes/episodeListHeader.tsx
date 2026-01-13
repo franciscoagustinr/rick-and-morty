@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
-import CopyButton from "./copyButton";
-import ToggleArrowButton from "./toggleArrowButton";
+import CopyButton from "@/components/copyButton";
+import ToggleArrowButton from "@/components/toggleArrowButton";
 
 interface EpisodesListProps {
     title: string | undefined;

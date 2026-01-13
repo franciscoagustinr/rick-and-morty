@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Character } from '@/types';
-import CharacterCard from '@/components/characterCard';
+import CharacterCard from '@/components/characters/characterCard';
 import { useCharacters } from '@/hooks/useCharacters';
-import Pagination from './pagination';
+import Pagination from '@/components/pagination';
 import SelectedCharacterIndicator from './selectedCharacterIndicator';
 
 interface CharacterSectionProps {
