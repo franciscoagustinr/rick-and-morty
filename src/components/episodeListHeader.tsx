@@ -52,7 +52,9 @@ const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, 
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div title={`${title === 'Shared Episodes' ? `Appears together in ${episodeIds.length}/51 total episodes` : `Appears in ${episodeIds.length}/51 total episodes`}`} className="font-mono tracking-wide select-none">
+                    <div title={`${title === 'Shared Episodes' ? `Appears together in ${episodeIds.length}/51 total episodes` : `Appears in ${episodeIds.length}/51 total episodes`}`}
+                        className="font-mono tracking-wide select-none"
+                    >
                         <span className="text-base font-semibold">{episodeIds.length}</span><span className="text-xs font-light text-gray-300">/51</span>
                     </div>
                     {onToggle && (
@@ -60,7 +62,7 @@ const EpisodeListHeader = ({ image, title, episodeIds, characterId, characters, 
                     )}
                 </div>
                 {onCopy && (
-                    <CopyButton isCopied={isCopied} handleCopy={handleCopy} />
+                    <CopyButton isCopied={isCopied} handleCopy={handleCopy} quantityEpisodes={episodeIds.length} />
                 )}
 
             </div>

@@ -1,5 +1,6 @@
 import { Character } from "@/types";
 import EpisodesList from "./episodeList"
+import { useEffect, useState } from "react";
 
 interface EpisodesSectionProps {
     character1: Character | null;
@@ -11,8 +12,16 @@ interface EpisodesSectionProps {
 }
 
 export const EpisodesSection = ({ character1, character2, ids1, ids2, shared, showEpisodes }: EpisodesSectionProps) => {
-    const isDesktop = window.innerWidth >= 1024;
 
+    const [isDesktop, setIsDesktop] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return !showEpisodes ? (
         <div className="px-2 py-3 text-center border-2 border-red-500 mb-4 rounded-lg font-sans text-sm">
