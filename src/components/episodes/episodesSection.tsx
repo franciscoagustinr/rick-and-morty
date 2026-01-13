@@ -28,7 +28,7 @@ export const EpisodesSection = ({ character1, character2, ids1, ids2, shared, sh
             Please, select one character of each side to get the list of episodes they appeared in.
         </div>
     ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
             <EpisodesList
                 title={character1?.name}
                 characterId={character1?.id}

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["rickandmortyapi.com"],
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
