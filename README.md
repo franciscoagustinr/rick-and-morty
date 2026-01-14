@@ -48,4 +48,4 @@ npm run test
 
 [Rick and Morty API](https://rickandmortyapi.com/)
 
-**Desarrollado por** | [Portfolio](https://franciscoagustinr.dev)
+**Desarrollado por** | [Francisco Agustín Rodríguez](https://franciscoagustinr.dev)
